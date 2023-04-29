@@ -1,0 +1,15 @@
+name: Running tests on Flutter App
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: FIGLET
+        run: sudo apt install figlet && figlet saurabh && figlet FLUTTER
