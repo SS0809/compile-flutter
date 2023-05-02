@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+
+final dio = Dio();
 
 void main() =>  runApp(MaterialApp(
     home: Home(),
     title: 'Compile',
   ));
 class Home extends StatelessWidget{
+
+  void getHttp() async {
+    final response = await dio.get('https://8fac-106-76-95-15.ngrok-free.app/api/projects/');
+    print(response);
+  }
+
+ void ge5t() async{
+   var response = Dio().get('https://8fac-106-76-95-15.ngrok-free.app/api/projects/');
+   print(response);
+ }
   @override
   Widget build(BuildContext context){
+    getHttp();
+    ge5t();
     return  Scaffold(
       appBar: AppBar(
       /*  title: Center(
@@ -71,6 +86,7 @@ class Home extends StatelessWidget{
         child: Text('RUn'),
         backgroundColor: Colors.deepPurple[400],
         onPressed: () {
+
           },
       ),
     );
