@@ -1,66 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
+import 'network.dart';
 
 void main() =>  runApp(MaterialApp(
     home: Home(),
     title: 'Compile',
   ));
 class Home extends StatelessWidget{
-
-  void getHttp() async {
-
-
-    var headers = {
-      'username': 'saurabhss'
-    };
-    var request = http.Request('GET', Uri.parse('http://localhost:8090/api/projects/ok'));
-
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    }
-    else {
-      print(response.reasonPhrase);
-    }
-
-
-  }
-
- void postHttp() async{
-   var headers = {
-     'Content-Type': 'application/json'
-   };
-   var request = http.Request('POST', Uri.parse('https://b4c9-106-77-141-46.ngrok-free.app/api/projects/timeline'));
-   request.body = json.encode({
-     "id": "1",
-     "timeline": "2"
-   });
-   request.headers.addAll(headers);
-
-   http.StreamedResponse response = await request.send();
-
-   if (response.statusCode == 200) {
-     print(await response.stream.bytesToString());
-   }
-   else {
-     print(response.reasonPhrase);
-   }
- }
   @override
   Widget build(BuildContext context){
     getHttp();
     postHttp();
     return  Scaffold(
       appBar: AppBar(
-      /*  title: Center(
-          child: Text('Compile'),
-        ),center
-        */
         title : Text('Compile'),
         backgroundColor: Colors.deepPurple[400],
       ),
