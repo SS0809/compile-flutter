@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
+import 'dart:convert';
 
-final dio = Dio();
 
 void main() =>  runApp(MaterialApp(
     home: Home(),
@@ -11,18 +10,51 @@ void main() =>  runApp(MaterialApp(
 class Home extends StatelessWidget{
 
   void getHttp() async {
-    final response = await dio.get('https://8fac-106-76-95-15.ngrok-free.app/api/projects/');
-    print(response);
+
+
+    var headers = {
+      'username': 'saurabhss'
+    };
+    var request = http.Request('GET', Uri.parse('http://localhost:8090/api/projects/ok'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
+
   }
 
- void ge5t() async{
-   var response = Dio().get('https://8fac-106-76-95-15.ngrok-free.app/api/projects/');
-   print(response);
+ void postHttp() async{
+   var headers = {
+     'Content-Type': 'application/json'
+   };
+   var request = http.Request('POST', Uri.parse('https://b4c9-106-77-141-46.ngrok-free.app/api/projects/timeline'));
+   request.body = json.encode({
+     "id": "1",
+     "timeline": "2"
+   });
+   request.headers.addAll(headers);
+
+   http.StreamedResponse response = await request.send();
+
+   if (response.statusCode == 200) {
+     print(await response.stream.bytesToString());
+   }
+   else {
+     print(response.reasonPhrase);
+   }
  }
   @override
   Widget build(BuildContext context){
     getHttp();
-    ge5t();
+    postHttp();
     return  Scaffold(
       appBar: AppBar(
       /*  title: Center(
@@ -86,7 +118,8 @@ class Home extends StatelessWidget{
         child: Text('RUn'),
         backgroundColor: Colors.deepPurple[400],
         onPressed: () {
-
+          getHttp();
+          postHttp();
           },
       ),
     );
