@@ -19,6 +19,12 @@ class Home extends StatelessWidget{
           child: Column(
             children: [
               SizedBox(height: 16,),
+              TextButton(
+                child: Text('reset', style: TextStyle(fontSize: 20.0),),
+                     onPressed: () {
+                       postHttp2();
+                     },
+              ),
               Text('Welcome to the Compiler',style: TextStyle(fontSize: 25),),
               SizedBox(height: 25,),
               TextField(
